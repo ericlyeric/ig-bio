@@ -1,0 +1,25 @@
+{
+  "name": "ig-bio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericlyeric/ig-bio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericlyeric/ig-bio/issues"
+  },
+  "homepage": "https://github.com/ericlyeric/ig-bio#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "instagram-private-api": "^1.45.3",
+    "re2": "^1.17.4"
+  }
+}
