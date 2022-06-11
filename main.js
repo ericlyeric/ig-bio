@@ -42,22 +42,28 @@ const calculateAge = () => {
 }
 
 const main = async() => {
-  console.log("logging into ig");
-  await ig.simulate.preLoginFlow();
-  await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
-
-  // logout of ig when done, don't need to wait for requests to resolve
-  process.nextTick(async () => await ig.simulate.postLoginFlow());
-
-  console.log('calculating age');
-  const ageString = calculateAge();
-  console.log(`age: ${ageString}`);
-
-  console.log('setting biography');
-  console.log(`🐶 cavachon\n🎂 ${ageString}`);
-  await ig.account.setBiography(`🐶 cavachon\n🎂 ${ageString}`)
-  console.log('all done');
-  process.exit(1);
+  let date = new Date().getDay();
+  // run every Friday
+  if (date === 5) {
+    console.log("logging into ig");
+    await ig.simulate.preLoginFlow();
+    await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
+  
+    // logout of ig when done, don't need to wait for requests to resolve
+    process.nextTick(async () => await ig.simulate.postLoginFlow());
+  
+    console.log('calculating age');
+    const ageString = calculateAge();
+    console.log(`age: ${ageString}`);
+  
+    console.log('setting biography');
+    console.log(`🐶 cavachon\n🎂 ${ageString}`);
+    await ig.account.setBiography(`🐶 cavachon\n🎂 ${ageString}`)
+    console.log('all done');
+    process.exit(1);
+  } else {
+    console.log("It's not Friday");
+  }
 }
 
 console.log("starting...");
