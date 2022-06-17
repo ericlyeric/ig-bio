@@ -63,6 +63,7 @@ const main = async() => {
     process.exit(1);
   } else {
     console.log("It's not Friday");
+    process.exit(1);
   }
 }
 
