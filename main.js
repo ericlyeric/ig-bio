@@ -43,8 +43,8 @@ const calculateAge = () => {
 
 const main = async() => {
   let date = new Date().getDay();
-  // run every Friday
-  if (date === 5) {
+  // run every Saturday because his birthday was on a Friday
+  if (date === 6) {
     console.log("logging into ig");
     await ig.simulate.preLoginFlow();
     await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
@@ -62,7 +62,7 @@ const main = async() => {
     console.log('all done');
     process.exit(1);
   } else {
-    console.log("It's not Friday");
+    console.log("It's not Saturday");
     process.exit(1);
   }
 }
