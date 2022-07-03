@@ -7,14 +7,18 @@ const getAgeInDays = (today, birthday) => {
   const msPerDay = 1000 * 60 * 60 * 24;
   // discard time and timezone
   const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+  console.log(`Today UTC ${todayUTC}`);
   const birthdayUTC = Date.UTC(birthday.getFullYear(), birthday.getMonth(), birthday.getDate());
+  console.log(`Birthday UTC ${birthdayUTC}`);
 
   return Math.floor((todayUTC - birthdayUTC) / msPerDay);
 }
 
 const calculateAge = () => {
   const today = new Date();
+  console.log(`Today's date: ${today}`);
   const birthday = new Date(process.env.BIRTHDAY_ISO_8601);
+  console.log(`Birthday: ${birthday}`);
 
   const ageInDays = getAgeInDays(today, birthday);
   // 7 days = 1 week
