@@ -48,21 +48,25 @@ const main = async() => {
   console.log(`The day of the week is: ${date}`);
   // run every Saturday because his birthday was on a Friday
   if (date === 6 || date == 0) {
-    console.log("logging into ig");
-    await ig.simulate.preLoginFlow();
-    await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
-  
-    // logout of ig when done, don't need to wait for requests to resolve
-    process.nextTick(async () => await ig.simulate.postLoginFlow());
-  
-    console.log('calculating age');
-    const ageString = calculateAge();
-    console.log(`age: ${ageString}`);
-  
-    console.log('setting biography');
-    console.log(`🐶 cavachon\n🎂 ${ageString}`);
-    await ig.account.setBiography(`🐶 cavachon\n🎂 ${ageString}`)
-    console.log('all done');
+    try {
+      console.log("logging into ig");
+      await ig.simulate.preLoginFlow();
+      await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
+    
+      // logout of ig when done, don't need to wait for requests to resolve
+      process.nextTick(async () => await ig.simulate.postLoginFlow());
+    
+      console.log('calculating age');
+      const ageString = calculateAge();
+      console.log(`age: ${ageString}`);
+    
+      console.log('setting biography');
+      console.log(`🐶 cavachon\n🎂 ${ageString}`);
+      await ig.account.setBiography(`🐶 cavachon\n🎂 ${ageString}`)
+      console.log('all done');
+    } catch (error) {
+      console.log(error);
+    }
   } else {
     console.log("It's not Saturday");
   }
