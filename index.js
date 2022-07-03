@@ -50,7 +50,6 @@ const main = async() => {
   if (date === 6 || date == 0) {
     try {
       console.log("logging into ig");
-      await ig.simulate.preLoginFlow();
       await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
     
       // logout of ig when done, don't need to wait for requests to resolve
