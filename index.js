@@ -1,6 +1,7 @@
 require('dotenv').config();
 const {IgApiClient} = require('instagram-private-api');
 const ig = new IgApiClient();
+ig.state.generateDevice(process.env.IG_USERNAME);
 
 const getAgeInDays = (today, birthday) => {
   // 1000ms = 1s, 60s = 1m, 60 mins = 1hr, 24hr = 1day
@@ -44,10 +45,9 @@ const calculateAge = () => {
 
 const main = async() => {
   let date = new Date().getDay();
-  console.log(date);
+  console.log(`The day of the week is: ${date}`);
   // run every Saturday because his birthday was on a Friday
   if (date === 6 || date == 0) {
-    ig.state.generateDevice(process.env.IG_USERNAME);
     console.log("logging into ig");
     await ig.simulate.preLoginFlow();
     await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
