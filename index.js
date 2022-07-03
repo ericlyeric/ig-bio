@@ -8,18 +8,14 @@ const getAgeInDays = (today, birthday) => {
   const msPerDay = 1000 * 60 * 60 * 24;
   // discard time and timezone
   const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
-  console.log(`Today UTC ${todayUTC}`);
   const birthdayUTC = Date.UTC(birthday.getFullYear(), birthday.getMonth(), birthday.getDate());
-  console.log(`Birthday UTC ${birthdayUTC}`);
 
   return Math.floor((todayUTC - birthdayUTC) / msPerDay);
 }
 
 const calculateAge = () => {
   const today = new Date();
-  console.log(`Today's date: ${today}`);
   const birthday = new Date(process.env.BIRTHDAY_ISO_8601);
-  console.log(`Birthday: ${birthday}`);
 
   const ageInDays = getAgeInDays(today, birthday);
   // 7 days = 1 week
@@ -48,24 +44,20 @@ const main = async() => {
   console.log(`The day of the week is: ${date}`);
   // run every Saturday because his birthday was on a Friday
   if (date === 6 || date == 0) {
-    try {
-      console.log("logging into ig");
-      await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
-    
-      // logout of ig when done, don't need to wait for requests to resolve
-      process.nextTick(async () => await ig.simulate.postLoginFlow());
-    
-      console.log('calculating age');
-      const ageString = calculateAge();
-      console.log(`age: ${ageString}`);
-    
-      console.log('setting biography');
-      console.log(`🐶 cavachon\n🎂 ${ageString}`);
-      await ig.account.setBiography(`🐶 cavachon\n🎂 ${ageString}`)
-      console.log('all done');
-    } catch (error) {
-      console.log(error);
-    }
+    console.log("logging into ig");
+    await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
+  
+    // logout of ig when done, don't need to wait for requests to resolve
+    process.nextTick(async () => await ig.simulate.postLoginFlow());
+  
+    console.log('calculating age');
+    const ageString = calculateAge();
+    console.log(`age: ${ageString}`);
+  
+    console.log('setting biography');
+    console.log(`🐶 cavachon\n🎂 ${ageString}`);
+    await ig.account.setBiography(`🐶 cavachon\n🎂 ${ageString}`)
+    console.log('all done');
   } else {
     console.log("It's not Saturday");
   }
