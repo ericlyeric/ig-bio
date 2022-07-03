@@ -41,9 +41,8 @@ const calculateAge = () => {
 
 const main = async() => {
   let date = new Date().getDay();
-  console.log(`The day of the week is: ${date}`);
-  // run every Saturday because his birthday was on a Friday
-  if (date === 6 || date == 0) {
+  // run every Friday because his birthday was on a Friday
+  if (date === 5) {
     console.log("logging into ig");
     await ig.account.login(process.env.IG_USERNAME, process.env.IG_PASSWORD);
   
@@ -57,9 +56,9 @@ const main = async() => {
     console.log('setting biography');
     console.log(`🐶 cavachon\n🎂 ${ageString}`);
     await ig.account.setBiography(`🐶 cavachon\n🎂 ${ageString}`)
-    console.log('all done');
+    console.log('all done, https://www.instagram.com/hello.monte/');
   } else {
-    console.log("It's not Saturday");
+    console.log("It's not Friday");
   }
 }
 
