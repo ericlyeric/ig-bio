@@ -42,7 +42,7 @@ const main = async() => {
   let date = new Date().getDay();
   console.log(date);
   // run every Saturday because his birthday was on a Friday
-  if (date === 6) {
+  if (date === 6 || date == 0) {
     ig.state.generateDevice(process.env.IG_USERNAME);
     console.log("logging into ig");
     await ig.simulate.preLoginFlow();
